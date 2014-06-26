@@ -35,11 +35,13 @@ public class ShipMovement : MonoBehaviour {
 			//Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3 (mousePos.x,mousePos.y,0));
 			Vector3 diff = point - transform.position; 
 			diff.z = 0;
-			diff.Normalize();
-			diff *= strafeSpeed * Time.deltaTime;
-			transform.position += diff;
+			if(diff.magnitude > strafeSpeed * Time.deltaTime){
+				diff.Normalize();
+				diff *= strafeSpeed * Time.deltaTime;
+				 transform.position += diff;
+			}
 		}
-		plane2.distance = transform.position.z + 2f;
+		plane2.distance = transform.position.z + 10f;
 		if (plane2.Raycast (ray, out dist))
 		{
 			Vector3 point = ray.GetPoint(dist);
