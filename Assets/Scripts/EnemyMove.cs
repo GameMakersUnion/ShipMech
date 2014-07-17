@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyMove : MonoBehaviour {
 	
-	public float ActivationDistance = 10f;
+	public float ActivationDistance = 100f;
 	public GameObject spaceship;
 	public Vector2 destination = new Vector2(0, 0);
 	public float SpinSpeed = 10f;
@@ -12,22 +12,28 @@ public class EnemyMove : MonoBehaviour {
 	private bool isActivated = false;
 	private Vector2 directionVector;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isActivated){
-			float distance = transform.position.z-spaceship.transform.position.z;
-			if (distance<ActivationDistance)
-			{isActivated=true;
-			directionVector = new Vector2(destination.x - transform.position.x, destination.y - transform.position.y);
-			directionVector.Normalize();
-			directionVector*=transpeed;
+		if (!isActivated)
+        {
+			float distance = transform.position.z - spaceship.transform.position.z;
+            //Debug.Log(distance + " < " + ActivationDistance + " = " + (distance < ActivationDistance));
+			if (distance < ActivationDistance)
+			{
+                isActivated = true;
+                directionVector = new Vector2(destination.x - transform.position.x, destination.y - transform.position.y);
+                directionVector.Normalize();
+                directionVector *= transpeed * 0.1f;
+                //Debug.Log("activated " + spaceship.transform.position.z);
 			}
 		}
-		else{
+		else
+        {
 			transform.Rotate(0, 0, Time.deltaTime*SpinSpeed);
 			transform.position = new Vector3(transform.position.x+directionVector.x, transform.position.y+directionVector.y, transform.position.z);
 		}

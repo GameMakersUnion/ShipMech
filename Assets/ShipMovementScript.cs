@@ -89,7 +89,7 @@ public class ShipMovementScript : MonoBehaviour {
 					}
 					if (hit.collider.transform.tag == "civilian"){
 						Destroy(hit.collider.gameObject);
-						score-=1000;
+						score-=100;
 						damage();
 					}
 					else{
