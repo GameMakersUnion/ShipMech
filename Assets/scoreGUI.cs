@@ -13,7 +13,7 @@ public class scoreGUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector2 pos = Camera.main.WorldToScreenPoint(transform.parent.position);
-        transform.position = pos.normalized;
+		transform.position = pos.normalized+new Vector2 (0.2f, 0f);
 
 	}
     void OnGUI()
